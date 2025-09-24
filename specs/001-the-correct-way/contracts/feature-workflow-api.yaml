@@ -1,0 +1,108 @@
+# API Contract: Feature Specification Endpoint
+
+## Endpoint: POST /specify
+
+### Description
+Creates a new feature specification based on user description following the spec-driven development approach.
+
+### Request
+```
+POST /specify
+Content-Type: application/json
+```
+
+#### Request Body
+```json
+{
+  "feature_description": "string (required)"
+}
+```
+
+### Response
+#### 201 Created
+```json
+{
+  "branch_name": "string",
+  "spec_file_path": "string",
+  "status": "specification created"
+}
+```
+
+#### 400 Bad Request
+```json
+{
+  "error": "string"
+}
+```
+
+### Validation Rules
+- feature_description must be provided and non-empty
+- Branch name follows format: NNN-feature-name (e.g., 001-my-feature)
+- Specification must follow template structure
+- Specification must pass review checklist
+
+---
+
+# API Contract: Implementation Planning Endpoint
+
+## Endpoint: POST /plan
+
+### Description
+Generates an implementation plan based on the feature specification.
+
+### Request
+```
+POST /plan
+```
+
+### Response
+#### 201 Created
+```json
+{
+  "plan_file_path": "string",
+  "status": "implementation plan created",
+  "artifacts": [
+    "research.md",
+    "data-model.md", 
+    "quickstart.md"
+  ]
+}
+```
+
+#### 400 Bad Request
+```json
+{
+  "error": "string"
+}
+```
+
+---
+
+# API Contract: Task Generation Endpoint
+
+## Endpoint: POST /tasks
+
+### Description
+Generates a task list based on the implementation plan.
+
+### Request
+```
+POST /tasks
+```
+
+### Response
+#### 201 Created
+```json
+{
+  "tasks_file_path": "string",
+  "status": "tasks generated",
+  "task_count": "integer"
+}
+```
+
+#### 400 Bad Request
+```json
+{
+  "error": "string"
+}
+```
